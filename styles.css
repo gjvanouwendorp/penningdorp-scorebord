@@ -1,0 +1,26 @@
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #f0f0f0;
+}
+
+.score-column {
+    text-align: center;
+    padding: 20px;
+}
+
+.morris {
+    background-color: #a8d5e2;
+}
+
+.ize {
+    background-color: #f7c6c7;
+}
+
+.score {
+    font-size: 48px;
+    margin: 20px 0;
+}
+
+.btn-score {
+    font-size: 24px;
+}

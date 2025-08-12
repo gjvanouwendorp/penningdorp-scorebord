@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { MongoClient } = require('mongodb');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 4000;
 const mongoUrl = 'mongodb://localhost:27017';
 const dbName = 'penningdorp-scorebord';
 const collectionName = 'scores';

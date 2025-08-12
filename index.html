@@ -15,8 +15,9 @@
                 <img src="assets/morris.png" alt="Morris" class="img-fluid rounded-circle" style="width: 40%;">
                 <div class="score" id="morris-score">0</div>
                 <div class="milestones">
-                    <div id="morris-food">🍽️ nog 10 punten</div>
-                    <div id="morris-boss">👑 nog 100 punten</div>
+                    <div class="milestones">
+                        🍽️ <span id="morris-food">nog 10</span> | 👑 <span id="morris-boss">nog 100</span>
+                    </div>
                 </div>
                 <button class="btn btn-primary btn-score" onclick="addPoint('morris')">+1</button>
             </div>
@@ -24,8 +25,9 @@
                 <img src="assets/ize.png" alt="Ize" class="img-fluid rounded-circle" style="width: 40%;">
                 <div class="score" id="ize-score">0</div>
                 <div class="milestones">
-                    <div id="ize-food">🍽️ nog 10 punten</div>
-                    <div id="ize-boss">👑 nog 100 punten</div>
+                    <div class="milestones">
+                        🍽️ <span id="ize-food">nog 10</span> | 👑 <span id="ize-boss">nog 100</span>
+                    </div>
                 </div>
                 <button class="btn btn-primary btn-score" onclick="addPoint('ize')">+1</button>
             </div>
@@ -53,8 +55,8 @@
             const foodRemaining = foodMilestone - (scores[child] % foodMilestone);
             const bossRemaining = bossMilestone - (scores[child] % bossMilestone);
 
-            document.getElementById(child + '-food').innerText = `🍽️ nog ${foodRemaining} punten`;
-            document.getElementById(child + '-boss').innerText = `👑 nog ${bossRemaining} punten`;
+            document.getElementById(child + '-food').innerText = `nog ${foodRemaining}`;
+            document.getElementById(child + '-boss').innerText = `nog ${bossRemaining}`;
         }
     </script>
 </body>

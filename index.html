@@ -36,7 +36,7 @@
     <div id="pin-modal" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
       <div style="background:white; padding:2em; border-radius:1em; text-align:center; max-width:90vw;">
         <h5>Voer PIN in om te bewerken</h5>
-        <input id="pin-input" type="password" maxlength="4" style="font-size:2em; text-align:center;" autofocus>
+        <input id="pin-input" type="password" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="font-size:2em; text-align:center;" autofocus>
         <div id="pin-error" style="color:red; margin-top:1em; display:none;">Foutieve PIN</div>
       </div>
     </div>

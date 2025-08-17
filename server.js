@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 let db, collection;
 
 // Connectie met MongoDB opzetten
-MongoClient.connect(mongoUrl, { useUnifiedTopology: true })
+MongoClient.connect(mongoUrl)
   .then(client => {
     db = client.db(dbName);
     collection = db.collection(collectionName);

@@ -87,8 +87,8 @@
             const foodRemaining = foodMilestone - (scores[child] % foodMilestone);
             const bossRemaining = bossMilestone - (scores[child] % bossMilestone);
 
-            document.getElementById(child + '-food').innerText = `nog ${foodRemaining}`;
-            document.getElementById(child + '-boss').innerText = `nog ${bossRemaining}`;
+            document.getElementById(child + '-food').innerText = ` nog ${foodRemaining}`;
+            document.getElementById(child + '-boss').innerText = ` nog ${bossRemaining}`;
         }
 
         // Init scores bij laden pagina

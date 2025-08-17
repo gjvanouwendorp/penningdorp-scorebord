@@ -117,10 +117,21 @@ function hideEditUI() {
 }
 
 function showPinModal() {
-    document.getElementById('pin-modal').style.display = 'flex';
+    const modal = document.getElementById('pin-modal');
+    modal.style.display = 'flex';
     document.getElementById('pin-input').value = '';
     document.getElementById('pin-error').style.display = 'none';
     document.getElementById('pin-input').focus();
+
+    // Voeg click event toe om modal te sluiten als je erbuiten klikt
+    function outsideClickHandler(e) {
+        if (e.target === modal) {
+            hidePinModal();
+            hideEditUI();
+            modal.removeEventListener('click', outsideClickHandler);
+        }
+    }
+    modal.addEventListener('click', outsideClickHandler);
 }
 
 function hidePinModal() {

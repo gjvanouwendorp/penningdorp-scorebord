@@ -34,6 +34,27 @@ async function addPoint(child) {
     }
 }
 
+async function removePoint(child) {
+    if (window.confirm("Wil je echt 1 punt aftrekken?")) {
+        scores[child] = Math.max(0, scores[child] - 1);
+        updateUI();
+        try {
+            const response = await fetch('/api/scores', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(scores)
+            });
+            if (response.ok) {
+                const data = await response.json();
+                scores = data;
+                updateUI();
+            }
+        } catch (e) {
+            // eventueel error handling
+        }
+    }
+}
+
 function updateUI() {
     ['morris', 'ize'].forEach(child => {
         document.getElementById(child + '-score').innerText = scores[child];

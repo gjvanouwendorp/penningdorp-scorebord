@@ -11,6 +11,7 @@ async function fetchScores() {
         scores = data;
         updateUI();
     } catch (e) {
+        alert("De verbinding met de back-end werkt niet goed. Vraag Geert Jan om hulp!");
         // fallback: laat scores op 0
     }
 }
@@ -30,6 +31,7 @@ async function addPoint(child) {
             updateUI();
         }
     } catch (e) {
+        alert("De verbinding met de back-end werkt niet goed. Vraag Geert Jan om hulp!");
         // eventueel error handling
     }
 }
@@ -50,6 +52,7 @@ async function removePoint(child) {
                 updateUI();
             }
         } catch (e) {
+            alert("De verbinding met de back-end werkt niet goed. Vraag Geert Jan om hulp!");
             // eventueel error handling
         }
     }

@@ -65,8 +65,8 @@ if ('serviceWorker' in navigator) {
 // PIN modal & edit functionaliteit
 const PIN_CODE = "7868";
 
-function isEditMode() {
-    return window.location.search.includes('edit');
+function isIphone() {
+    return /iPhone/i.test(navigator.userAgent);
 }
 
 function showEditUI() {
@@ -100,7 +100,7 @@ function hidePinModal() {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    if (isEditMode()) {
+    if (isIphone()) {
         hideEditUI();
         showPinModal();
         document.getElementById('pin-input').addEventListener('input', function(e) {

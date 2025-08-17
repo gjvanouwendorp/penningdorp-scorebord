@@ -1,0 +1,14 @@
+[Unit]
+Description=Node.js Server for Scorebord
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/pad/naar/jouw/project
+ExecStart=/usr/bin/env node server.js
+Restart=on-failure
+User=YOUR_USERNAME
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

@@ -70,3 +70,8 @@ body {
     font-size: 24px;
 }
 .edit-only { display: none; }
+
+#pin-input {
+    letter-spacing: 0.2em !important;
+    width: 7em;
+}

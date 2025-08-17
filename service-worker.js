@@ -1,15 +1,15 @@
 const CACHE_NAME = 'scorebord-cache-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/assets/scorebord-64.png',
-    '/assets/scorebord-128.png',
-    '/assets/scorebord-192.png',
-    '/assets/scorebord-256.png',
-    '/assets/scorebord-512.png',
-    '/assets/morris.png',
-    '/assets/ize.png'
+    '/scorebord/',
+    '/scorebord/index.html',
+    '/scorebord/styles.css',
+    '/scorebord/assets/scorebord-64.png',
+    '/scorebord/assets/scorebord-128.png',
+    '/scorebord/assets/scorebord-192.png',
+    '/scorebord/assets/scorebord-256.png',
+    '/scorebord/assets/scorebord-512.png',
+    '/scorebord/assets/morris.png',
+    '/scorebord/assets/ize.png'
 ];
 
 self.addEventListener('install', event => {

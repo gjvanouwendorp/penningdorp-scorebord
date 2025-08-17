@@ -36,7 +36,7 @@ MongoClient.connect(mongoUrl, { useUnifiedTopology: true }, function(err, client
   });
 });
 
-app.get('/api/score', (req, res) => {
+app.get('/api/scores', (req, res) => {
   collection.findOne({}, function(err, score) {
     if (err) {
       return res.status(500).json({ error: 'Serverfout' });
@@ -48,7 +48,7 @@ app.get('/api/score', (req, res) => {
   });
 });
 
-app.post('/api/score', (req, res) => {
+app.post('/api/scores', (req, res) => {
   const { morris, ize } = req.body;
   if (typeof morris !== 'number' || typeof ize !== 'number') {
     return res.status(400).json({ error: 'Scores moeten nummers zijn' });
@@ -57,6 +57,6 @@ app.post('/api/score', (req, res) => {
     if (err) {
       return res.status(500).json({ error: 'Serverfout' });
     }
-    res.json({ success: true });
+    res.json({ morris, ize });
   });
 });

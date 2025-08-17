@@ -99,21 +99,23 @@ function hidePinModal() {
     document.getElementById('pin-modal').style.display = 'none';
 }
 
-if (isEditMode()) {
-    hideEditUI();
-    showPinModal();
-    document.getElementById('pin-input').addEventListener('input', function(e) {
-        const val = e.target.value;
-        if (val.length === 4) {
-            if (val === PIN_CODE) {
-                hidePinModal();
-                showEditUI();
-            } else {
-                document.getElementById('pin-error').style.display = '';
-                e.target.value = '';
+window.addEventListener('DOMContentLoaded', function() {
+    if (isEditMode()) {
+        hideEditUI();
+        showPinModal();
+        document.getElementById('pin-input').addEventListener('input', function(e) {
+            const val = e.target.value;
+            if (val.length === 4) {
+                if (val === PIN_CODE) {
+                    hidePinModal();
+                    showEditUI();
+                } else {
+                    document.getElementById('pin-error').style.display = '';
+                    e.target.value = '';
+                }
             }
-        }
-    });
-} else {
-    hideEditUI();
-}
+        });
+    } else {
+        hideEditUI();
+    }
+});

@@ -20,7 +20,7 @@
                         <div style="font-size: 2em;">👑<span id="morris-boss" style="font-size: 0.5em;"> nog 100</span></div>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-score mt-3" onclick="addPoint('morris')">+1</button>
+                <button class="btn btn-primary btn-score mt-3 edit-only" onclick="addPoint('morris')">+1</button>
             </div>
             <div class="col-md-6 score-column ize">
                 <img src="assets/ize.png" alt="Ize" class="img-fluid rounded-circle" style="width: 40%;">
@@ -31,7 +31,7 @@
                         <div style="font-size: 2em;">👑<span id="ize-boss" style="font-size: 0.5em;"> nog 100</span></div>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-score mt-3" onclick="addPoint('ize')">+1</button>
+                <button class="btn btn-primary btn-score mt-3 edit-only" onclick="addPoint('ize')">+1</button>
             </div>
         </div>
     </div>
@@ -94,5 +94,57 @@
         // Init scores bij laden pagina
         window.addEventListener('DOMContentLoaded', fetchScores);
     </script>
+    <div id="pin-modal" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
+      <div style="background:white; padding:2em; border-radius:1em; text-align:center; max-width:90vw;">
+        <h5>Voer PIN in om te bewerken</h5>
+        <input id="pin-input" type="password" maxlength="4" style="font-size:2em; letter-spacing:1em; text-align:center; width:7em;" autofocus>
+        <div id="pin-error" style="color:red; margin-top:1em; display:none;">Foutieve PIN</div>
+      </div>
+    </div>
+<script>
+const PIN_CODE = "7868";
+
+function isEditMode() {
+    return window.location.search.includes('edit');
+}
+
+function showEditUI() {
+    document.querySelectorAll('.edit-only').forEach(btn => btn.style.display = '');
+}
+
+function hideEditUI() {
+    document.querySelectorAll('.edit-only').forEach(btn => btn.style.display = 'none');
+}
+
+function showPinModal() {
+    document.getElementById('pin-modal').style.display = 'flex';
+    document.getElementById('pin-input').value = '';
+    document.getElementById('pin-error').style.display = 'none';
+    document.getElementById('pin-input').focus();
+}
+
+function hidePinModal() {
+    document.getElementById('pin-modal').style.display = 'none';
+}
+
+if (isEditMode()) {
+    hideEditUI();
+    showPinModal();
+    document.getElementById('pin-input').addEventListener('input', function(e) {
+        const val = e.target.value;
+        if (val.length === 4) {
+            if (val === PIN_CODE) {
+                hidePinModal();
+                showEditUI();
+            } else {
+                document.getElementById('pin-error').style.display = '';
+                e.target.value = '';
+            }
+        }
+    });
+} else {
+    hideEditUI();
+}
+</script>
 </body>
 </html>

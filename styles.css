@@ -24,3 +24,4 @@ body {
 .btn-score {
     font-size: 24px;
 }
+.edit-only { display: none; }

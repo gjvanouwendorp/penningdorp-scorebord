@@ -57,7 +57,8 @@ body {
 }
 
 .milestones.d-flex {
-    justify-content: space-around !important;
+    justify-content: space-between !important;
+    gap: 2em;
 }
 
 .score {

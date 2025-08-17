@@ -32,64 +32,7 @@
         </div>
     </div>
 
-    <script>
-        let scores = {
-            morris: 0,
-            ize: 0
-        };
-
-        async function fetchScores() {
-            try {
-                const response = await fetch('/api/scores');
-                if (!response.ok) throw new Error('API error');
-                const data = await response.json();
-                scores = data;
-                updateUI();
-            } catch (e) {
-                // fallback: laat scores op 0
-            }
-        }
-
-        async function addPoint(child) {
-            scores[child]++;
-            updateUI();
-            try {
-                const response = await fetch('/api/scores', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(scores)
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    scores = data;
-                    updateUI();
-                }
-            } catch (e) {
-                // eventueel error handling
-            }
-        }
-
-        function updateUI() {
-            ['morris', 'ize'].forEach(child => {
-                document.getElementById(child + '-score').innerText = scores[child];
-                updateMilestones(child);
-            });
-        }
-
-        function updateMilestones(child) {
-            const foodMilestone = 10;
-            const bossMilestone = 100;
-
-            const foodRemaining = foodMilestone - (scores[child] % foodMilestone);
-            const bossRemaining = bossMilestone - (scores[child] % bossMilestone);
-
-            document.getElementById(child + '-food').innerText = ` nog ${foodRemaining}`;
-            document.getElementById(child + '-boss').innerText = ` nog ${bossRemaining}`;
-        }
-
-        // Init scores bij laden pagina
-        window.addEventListener('DOMContentLoaded', fetchScores);
-    </script>
+    <script src="main.js"></script>
     <div id="pin-modal" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
       <div style="background:white; padding:2em; border-radius:1em; text-align:center; max-width:90vw;">
         <h5>Voer PIN in om te bewerken</h5>

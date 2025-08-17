@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', fetchScores);
 // PWA: registreer service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js');
+        navigator.serviceWorker.register('service-worker.js', { scope: '/scorebord/' });
     });
 }
 

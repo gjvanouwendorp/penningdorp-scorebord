@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 4000;
-const mongoUrl = 'mongodb://localhost:27017';
+const mongoUrl = 'mongodb://localhost:27017/?retryWrites=true&w=majority&directConnection=true&serverSelectionTimeoutMS=5000';
 const dbName = 'penningdorp-scorebord';
 const collectionName = 'scores';
 

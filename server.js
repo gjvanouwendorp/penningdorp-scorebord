@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 4000;
-const mongoUrl = 'mongodb://localhost:27017/?retryWrites=true&w=majority&directConnection=true&serverSelectionTimeoutMS=5000';
+const mongoUrl = 'mongodb://localhost:27017';
 const dbName = 'penningdorp-scorebord';
 const collectionName = 'scores';
 
@@ -12,8 +12,15 @@ app.use(bodyParser.json());
 
 let db, collection;
 
+const mongoOptions = {
+  useUnifiedTopology: true,
+  retryWrites: true,
+  w: 'majority',
+  directConnection: true,
+  serverSelectionTimeoutMS: 5000
+};
 // Connectie met MongoDB opzetten
-MongoClient.connect(mongoUrl, { useUnifiedTopology: true }, function(err, client) {
+MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
   if (err) {
     console.error('Fout bij verbinden met MongoDB:', err);
     process.exit(1);

@@ -41,6 +41,24 @@
     </div>
 
     <script src="main.js"></script>
+    <script>
+      // Prevent double-tap/click zoom on .btn-score buttons (mobile and desktop)
+      document.addEventListener('DOMContentLoaded', function() {
+        let lastTouch = 0;
+        document.querySelectorAll('.btn-score').forEach(btn => {
+          btn.addEventListener('touchend', function(e) {
+            const now = Date.now();
+            if (now - lastTouch <= 400) {
+              e.preventDefault();
+            }
+            lastTouch = now;
+          });
+          btn.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+          });
+        });
+      });
+    </script>
     <div id="pin-modal" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
       <div style="background:white; padding:2em; border-radius:1em; text-align:center; max-width:90vw;">
         <h5>Voer PIN in om te bewerken</h5>

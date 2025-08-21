@@ -19,51 +19,71 @@ const mongoOptions = {
   directConnection: true,
   serverSelectionTimeoutMS: 5000
 };
-// Connectie met MongoDB opzetten
-MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
-  if (err) {
-    console.error('Fout bij verbinden met MongoDB:', err);
-    process.exit(1);
-  }
-  db = client.db(dbName);
-  collection = db.collection(collectionName);
-  // Zorg dat er altijd één document is
-  collection.updateOne(
-    {},
-    { $setOnInsert: { morris: 0, ize: 0 } },
-    { upsert: true }
-  , function(err) {
-    if (err) {
-      console.error('Fout bij initialiseren van score document:', err);
-      process.exit(1);
+
+async function startServer() {
+  try {
+    console.log('Connecting to MongoDB...');
+    const client = await MongoClient.connect(mongoUrl, mongoOptions);
+    console.log('Connected to MongoDB');
+
+    db = client.db(dbName);
+    console.log(`Database selected: ${dbName}`);
+
+    collection = db.collection(collectionName);
+    console.log(`Collection selected: ${collectionName}`);
+
+    // Zorg dat er altijd één document is
+    const updateResult = await collection.updateOne(
+      {},
+      { $setOnInsert: { morris: 0, ize: 0 } },
+      { upsert: true }
+    );
+    if (updateResult.upsertedCount > 0) {
+      console.log('Score document created');
+    } else {
+      console.log('Score document already exists');
     }
+
     app.listen(port, () => {
       console.log(`Server draait op http://localhost:${port}`);
     });
-  });
-});
+  } catch (err) {
+    console.error('Fout bij opstarten van de server:', err);
+    process.exit(1);
+  }
+}
 
-app.get('/api/scores', (req, res) => {
-  collection.findOne({}, function(err, score) {
-    if (err) {
-      return res.status(500).json({ error: 'Serverfout' });
-    }
+startServer();
+
+app.get('/api/scores', async (req, res) => {
+  try {
+    console.log('GET /api/scores called');
+    const score = await collection.findOne({});
     if (!score) {
+      console.log('No score document found');
       return res.status(404).json({ error: 'Score niet gevonden' });
     }
+    console.log('Score document found:', score);
     res.json({ morris: score.morris, ize: score.ize });
-  });
+  } catch (err) {
+    console.error('Fout bij ophalen van scores:', err);
+    res.status(500).json({ error: 'Serverfout' });
+  }
 });
 
-app.post('/api/scores', (req, res) => {
+app.post('/api/scores', async (req, res) => {
   const { morris, ize } = req.body;
   if (typeof morris !== 'number' || typeof ize !== 'number') {
+    console.log('Invalid score types:', req.body);
     return res.status(400).json({ error: 'Scores moeten nummers zijn' });
   }
-  collection.updateOne({}, { $set: { morris, ize } }, { upsert: true }, function(err) {
-    if (err) {
-      return res.status(500).json({ error: 'Serverfout' });
-    }
+  try {
+    console.log('POST /api/scores called with:', { morris, ize });
+    const updateResult = await collection.updateOne({}, { $set: { morris, ize } }, { upsert: true });
+    console.log('Score document updated:', updateResult.result);
     res.json({ morris, ize });
-  });
+  } catch (err) {
+    console.error('Fout bij opslaan van scores:', err);
+    res.status(500).json({ error: 'Serverfout' });
+  }
 });

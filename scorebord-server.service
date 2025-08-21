@@ -4,10 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/pad/naar/jouw/project
+WorkingDirectory=/var/www/default/html/scorebord
 ExecStart=/usr/bin/env node server.js
 Restart=on-failure
-User=YOUR_USERNAME
+User=gjvanouwendorp
 Environment=NODE_ENV=production
 
 [Install]

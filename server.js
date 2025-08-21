@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 let db, collection;
 
 const mongoOptions = {
-  useUnifiedTopology: true,
   retryWrites: true,
   w: 'majority',
   directConnection: true,
